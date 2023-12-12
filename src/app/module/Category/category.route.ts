@@ -5,4 +5,6 @@ const route = Router();
 
 route.post("/", categoryController.createCategory);
 
+route.get("/", categoryController.getAllCategories);
+
 export const categoryRoutes = route;

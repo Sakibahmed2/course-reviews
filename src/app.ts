@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { categoryRoutes } from "./app/module/Category/category.route";
+import notFound from "./app/middlewares/notFound";
+import { courseRoutes } from "./app/module/Course/course.route";
 const app: Application = express();
 
 //parser
@@ -9,8 +11,13 @@ app.use(cors());
 
 app.use("/api/categories", categoryRoutes);
 
+app.use("/api/course", courseRoutes);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to my project 🙂");
 });
+
+//not found error
+app.use(notFound);
 
 export default app;

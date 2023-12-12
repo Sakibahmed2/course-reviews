@@ -1,13 +1,14 @@
+import { Types } from "mongoose";
+
 interface TDetails {
   level: "Beginner" | "Intermediate" | "Advanced";
   description: string;
 }
 
 export interface TCourse {
-  _id: string; // MongoDB Object ID
   title: string;
   instructor: string;
-  categoryId: string; // Reference to the category collection
+  categoryId: Types.ObjectId; // Reference to the category collection
   price: number;
   tags: {
     name: string;
@@ -17,6 +18,6 @@ export interface TCourse {
   endDate: string;
   language: string;
   provider: string;
-  durationInWeeks: number;
+  durationInWeeks?: number;
   details: TDetails;
 }

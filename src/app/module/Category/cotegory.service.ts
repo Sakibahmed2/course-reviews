@@ -6,6 +6,12 @@ const createCategory = async (categoryData: TCategory) => {
   return result;
 };
 
+const getAllCategories = async () => {
+  const result = await Category.find();
+  return result;
+};
+
 export const categoryServices = {
   createCategory,
+  getAllCategories,
 };
