@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { RequestHandler } from "express";
 import { courseServices } from "./course.service";
 import sendResponse from "../../utils/sendResponse";
 
-const createCourse = async (req: Request, res: Response) => {
+const createCourse: RequestHandler = async (req, res, next) => {
   try {
     const result = await courseServices.createCourse(req.body);
 
@@ -12,12 +12,12 @@ const createCourse = async (req: Request, res: Response) => {
       message: "Course created successfully",
       data: result,
     });
-  } catch (error) {
-    res.json(error);
+  } catch (err) {
+    next(err);
   }
 };
 
-const getSingleCourse = async (req: Request, res: Response) => {
+const getSingleCourse: RequestHandler = async (req, res, next) => {
   try {
     const { courseId } = req.params;
 
@@ -29,8 +29,8 @@ const getSingleCourse = async (req: Request, res: Response) => {
       message: "Course and Reviews retrieved successfully",
       data: result,
     });
-  } catch (error) {
-    res.json(error);
+  } catch (err) {
+    next(err);
   }
 };
 

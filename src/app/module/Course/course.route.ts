@@ -11,6 +11,4 @@ route.post(
   courseController.createCourse
 );
 
-route.post("/", courseController.createCourse);
-
 export const courseRoutes = route;
