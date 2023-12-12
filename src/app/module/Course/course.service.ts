@@ -7,6 +7,12 @@ const createCourse = async (courseData: TCourse) => {
   return result;
 };
 
+const getSingleCourse = async (id: string) => {
+  const result = await Course.findById(id);
+  return result;
+};
+
 export const courseServices = {
   createCourse,
+  getSingleCourse,
 };

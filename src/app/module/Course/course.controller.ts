@@ -17,6 +17,24 @@ const createCourse = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleCourse = async (req: Request, res: Response) => {
+  try {
+    const { courseId } = req.params;
+
+    const result = await courseServices.getSingleCourse(courseId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Course and Reviews retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 export const courseController = {
   createCourse,
+  getSingleCourse,
 };

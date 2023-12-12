@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { categoryServices } from "./cotegory.service";
 import sendResponse from "../../utils/sendResponse";
 
-const createCategory = async (req: Request, res: Response) => {
+const createCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const result = await categoryServices.createCategory(req.body);
 
@@ -14,16 +19,15 @@ const createCategory = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    sendResponse(res, {
-      statusCode: 500,
-      success: false,
-      message: "Category created failed",
-      data: err,
-    });
+    next(err);
   }
 };
 
-const getAllCategories = async (req: Request, res: Response) => {
+const getAllCategories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const result = await categoryServices.getAllCategories();
     sendResponse(res, {
@@ -33,12 +37,7 @@ const getAllCategories = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err: any) {
-    sendResponse(res, {
-      success: false,
-      statusCode: 500,
-      message: "Category retrieve failed",
-      data: err,
-    });
+    next(err);
   }
 };
 
