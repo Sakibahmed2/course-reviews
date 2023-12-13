@@ -63,7 +63,13 @@ const getAllCoursesFromDB = async (queryParameters: TQueryParameters) => {
       .skip((parseInt(page) - 1) * parseInt(limit))
       .limit(parseInt(limit));
 
-    return result;
+    const meta = {
+      page: parseFloat(page),
+      limit: parseFloat(limit),
+      total: result.length,
+    };
+
+    return { result, meta };
   } catch (error) {
     throw new Error("Internal Server Error");
   }

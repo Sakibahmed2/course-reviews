@@ -13,8 +13,6 @@ const handleDuplicateError = (err: any): TGenericError => {
     },
   ];
 
-  console.log(errorDetails);
-
   const statusCode = 400;
 
   return {

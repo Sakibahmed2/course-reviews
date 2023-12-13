@@ -25,7 +25,8 @@ const getAllCourses: RequestHandler = async (req, res, next) => {
       success: true,
       statusCode: 200,
       message: "Courses retrieved successfully",
-      data: result,
+      meta: result.meta,
+      data: result.result,
     });
   } catch (err) {
     next(err);
