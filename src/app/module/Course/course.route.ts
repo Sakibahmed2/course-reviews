@@ -11,4 +11,6 @@ route.post(
   courseController.createCourse
 );
 
+route.get("/best", courseController.getBestCourse);
+
 export const courseRoutes = route;

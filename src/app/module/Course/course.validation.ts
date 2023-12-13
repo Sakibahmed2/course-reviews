@@ -7,7 +7,7 @@ const tagSchema = z.object({
 
 const detailsSchema = z.object({
   level: z.enum(["Beginner", "Intermediate", "Advanced"]),
-  description: z.string(),
+  description: z.string().optional(),
 });
 
 export const createCourseValidationSchema = z.object({

@@ -5,7 +5,7 @@ import notFound from "./app/middlewares/notFound";
 import { courseRoutes } from "./app/module/Course/course.route";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import { reviewRoutes } from "./app/module/Review/review.route";
-import { courseController } from "./app/module/Course/course.controller";
+import { coursesRoutes } from "./app/module/Course/courses.route";
 const app: Application = express();
 
 //parser
@@ -18,7 +18,7 @@ app.use("/api/course", courseRoutes);
 
 app.use("/api/reviews", reviewRoutes);
 
-app.get("/api/courses/:courseId/reviews", courseController.getSingleCourse);
+app.use("/api/courses", coursesRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to my project 🙂");
