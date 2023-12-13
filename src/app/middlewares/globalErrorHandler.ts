@@ -3,6 +3,7 @@ import { ErrorRequestHandler } from "express";
 import handleZodError from "../Error/zodError";
 import { ZodError } from "zod";
 import handleCastError from "../Error/castError";
+import handleDuplicateError from "../Error/duplicateError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   //setting default values
@@ -20,6 +21,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = customCastError?.statusCode;
     message = customCastError?.message;
     errorMessage = customCastError?.errorMessage;
+  } else if (err?.code === 11000) {
+    const customDuplicateError = handleDuplicateError(err);
+    statusCode = customDuplicateError?.statusCode;
+    message = customDuplicateError?.message;
+    errorMessage = customDuplicateError?.errorMessage;
   }
 
   return res.status(statusCode).json({
