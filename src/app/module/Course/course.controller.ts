@@ -21,7 +21,7 @@ const getAllCourses: RequestHandler = async (req, res, next) => {
   try {
     const result = await courseServices.getAllCoursesFromDB(req.query);
 
-    sendResponse(res, {
+    res.status(200).json({
       success: true,
       statusCode: 200,
       message: "Courses retrieved successfully",
