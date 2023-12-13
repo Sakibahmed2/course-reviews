@@ -2,6 +2,7 @@
 import { ErrorRequestHandler } from "express";
 import handleZodError from "../Error/zodError";
 import { ZodError } from "zod";
+import handleCastError from "../Error/castError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   //setting default values
@@ -14,6 +15,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = customZodError?.statusCode;
     message = customZodError?.message;
     errorMessage = customZodError.errorMessage;
+  } else if (err?.name === "CastError") {
+    const customCastError = handleCastError(err);
+    statusCode = customCastError?.statusCode;
+    message = customCastError?.message;
+    errorMessage = customCastError?.errorMessage;
   }
 
   return res.status(statusCode).json({

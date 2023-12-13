@@ -2,7 +2,7 @@ import { ZodError, ZodIssue } from "zod";
 import { TErrorSources, TGenericError } from "../interface/error";
 
 const handleZodError = (err: ZodError): TGenericError => {
-  const errorSources: TErrorSources = err.issues.map((issue: ZodIssue) => {
+  const errorDetails: TErrorSources = err.issues.map((issue: ZodIssue) => {
     return {
       path: issue?.path[issue.path.length - 1],
       message: issue.message,
@@ -10,7 +10,7 @@ const handleZodError = (err: ZodError): TGenericError => {
   });
 
   const statusCode = 400;
-  const errorMessage = errorSources
+  const errorMessage = errorDetails
     .map((error) => `${error.path} is ${error.message}`)
     .join(". ");
 
@@ -18,7 +18,7 @@ const handleZodError = (err: ZodError): TGenericError => {
     statusCode,
     message: "Validation error",
     errorMessage,
-    errorSources,
+    errorDetails,
   };
 };
 
